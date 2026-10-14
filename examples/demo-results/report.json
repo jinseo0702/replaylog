@@ -1,0 +1,29 @@
+{
+  "event_count": 5,
+  "hourly": [
+    {
+      "event_count": 3,
+      "hour_utc": "2026-10-14T00:00:00Z",
+      "server_error_count": 1
+    },
+    {
+      "event_count": 2,
+      "hour_utc": "2026-10-14T01:00:00Z",
+      "server_error_count": 1
+    }
+  ],
+  "server_error_count": 2,
+  "server_error_rate_percent": 40.0,
+  "services": [
+    {
+      "event_count": 1,
+      "server_error_count": 0,
+      "service": "mobile"
+    },
+    {
+      "event_count": 4,
+      "server_error_count": 2,
+      "service": "web"
+    }
+  ]
+}

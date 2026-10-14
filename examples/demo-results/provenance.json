@@ -1,0 +1,17 @@
+{
+  "actual_report_equals_fixed_oracle": true,
+  "application_sha256": {
+    "replaylog/__init__.py": "29e9ee18cf02a62f24f83729aff0016fccf57835710c90e9c374e2c3c676b8be",
+    "replaylog/__main__.py": "63115b9dc6590b56af5349e99b54a67b83c7d8b782e4590f25087b725b5b2ec8",
+    "replaylog/pipeline.py": "f85ed9be33e59f7e8d0bbb2e5a28780093ac643f3609ceb4c19bb708d205ced1",
+    "replaylog/reporting.py": "a488d1c2b7f8a7396eede894b73761232c8e660655654dcc4605e3d6dcb44df4",
+    "replaylog/storage.py": "db0f22a05d2fb20bcc59c2b78aeae4c10d4da0f3a5ca672f1c82b9a57cb6615f",
+    "replaylog/validation.py": "b5c64cc00f911054aad4844876d7e9a6e73032629a9c20e5c5b58e2f23a84ebd"
+  },
+  "batch_size": 4,
+  "input_sha256": "e3492c791345374ae88d20d371bb05443b8a14b538d06d830747a40ae8333ada",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.13.4",
+  "replay_report_equals_first_report": true,
+  "sqlite": "3.49.1"
+}
