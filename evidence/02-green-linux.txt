@@ -1,0 +1,36 @@
+Environment: {"platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.35", "python": "3.10.12", "sqlite": "3.37.2", "execution": "WSL Ubuntu-22.04 temporary source copy"}
+test_batch_size_does_not_change_final_result (test_contract.ContractTests) ... ok
+test_blank_line_is_a_rejected_physical_line (test_contract.ContractTests) ... ok
+test_collision_free_order_and_duplicate_multiplicity_do_not_change_metrics (test_contract.ContractTests) ... ok
+test_conflicting_query_is_not_silently_dropped (test_contract.ContractTests) ... ok
+test_conflicting_status_keeps_original (test_contract.ContractTests) ... ok
+test_database_is_structurally_valid_after_replay (test_contract.ContractTests) ... ok
+test_directory_cannot_be_used_as_database (test_contract.ContractTests) ... ok
+test_empty_file_has_zero_rate_and_empty_groups (test_contract.ContractTests) ... ok
+test_error_locations_match_independent_fixture (test_contract.ContractTests) ... ok
+test_first_run_summary_accounts_for_every_line (test_contract.ContractTests) ... ok
+test_first_valid_arrival_wins_a_conflict (test_contract.ContractTests) ... ok
+test_golden_business_report (test_contract.ContractTests) ... ok
+test_invalid_batch_sizes_are_rejected (test_contract.ContractTests) ... ok
+test_invalid_inputs_are_classified_without_blocking_valid_row (test_contract.ContractTests) ... ok
+test_invalid_utf8_fails_but_preserves_previously_committed_batch (test_contract.ContractTests) ... ok
+test_json_order_and_outside_whitespace_do_not_change_identity (test_contract.ContractTests) ... ok
+test_last_line_without_newline_is_processed (test_contract.ContractTests) ... ok
+test_missing_database_is_not_created_by_report (test_contract.ContractTests) ... ok
+test_missing_input_is_failure (test_contract.ContractTests) ... ok
+test_query_is_bound_as_data_not_sql (test_contract.ContractTests) ... ok
+test_rejection_export_contains_original_line_and_reason (test_contract.ContractTests) ... ok
+test_replay_preserves_events_rejections_and_report (test_contract.ContractTests) ... ok
+test_same_bytes_under_another_filename_do_not_duplicate_rejections (test_contract.ContractTests) ... ok
+test_same_id_in_two_services_is_not_duplicate (test_contract.ContractTests) ... ok
+test_status_boundaries_and_rate_denominator (test_contract.ContractTests) ... ok
+test_unwritable_output_path_is_reported_as_failure (test_contract.ContractTests) ... ok
+test_kill_after_commit_then_replay (test_crash_recovery.CrashRecoveryTests) ... ok
+test_kill_before_commit_then_replay (test_crash_recovery.CrashRecoveryTests) ... ok
+
+----------------------------------------------------------------------
+Ran 28 tests in 4.360s
+
+OK
+
+Exit code: 0
