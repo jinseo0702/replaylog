@@ -1,6 +1,7 @@
 """Black-box helpers; expected results never call implementation code."""
 
 import json
+from contextlib import closing
 import os
 from pathlib import Path
 import sqlite3
@@ -30,7 +31,7 @@ def event(**changes):
 
 
 def events_in(db):
-    with sqlite3.connect(db) as con:
+    with closing(sqlite3.connect(db)) as con:
         return con.execute(
             "SELECT service,event_id,event_time,query,status_code "
             "FROM events ORDER BY service,event_id"
@@ -38,7 +39,7 @@ def events_in(db):
 
 
 def rejections_in(db):
-    with sqlite3.connect(db) as con:
+    with closing(sqlite3.connect(db)) as con:
         return con.execute(
             "SELECT input_sha256,line_no,reason,detail,raw_line "
             "FROM rejections ORDER BY input_sha256,line_no"

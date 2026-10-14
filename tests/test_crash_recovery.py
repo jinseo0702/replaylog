@@ -1,5 +1,7 @@
 """Kill actual processes at deterministic transaction boundaries on POSIX."""
 
+import hashlib
+from contextlib import closing
 import json
 import os
 from pathlib import Path
@@ -8,11 +10,12 @@ import signal
 import sqlite3
 import subprocess
 import sys
+import unittest
 
 from tests.support import CliCase, FIXTURES, ROOT, child_env, events_in, rejections_in
 
 
-@__import__("unittest").skipUnless(os.name == "posix", "requires POSIX SIGKILL; run on Linux/WSL")
+@unittest.skipUnless(os.name == "posix", "requires POSIX SIGKILL; run on Linux/WSL")
 class CrashRecoveryTests(CliCase):
     def crash(self, db, phase):
         proc = subprocess.Popen(
@@ -33,6 +36,7 @@ class CrashRecoveryTests(CliCase):
         stdout, stderr = proc.communicate(timeout=10)
         self.assertEqual(proc.returncode, -signal.SIGKILL)
         self.assertEqual(stdout, "", "a killed run must not report successful completion")
+        return proc.returncode
 
     @staticmethod
     def cleanup_child(proc):
@@ -48,14 +52,28 @@ class CrashRecoveryTests(CliCase):
         for repeat in range(3):
             with self.subTest(phase=phase, repeat=repeat):
                 db = self.work / (phase + "-" + str(repeat) + ".db")
-                self.crash(db, phase)
+                killed_status = self.crash(db, phase)
                 self.assertEqual(len(events_in(db)), expected_events)
                 self.assertEqual(len(rejections_in(db)), expected_rejections)
                 self.ingest(db=db, batch=4)
                 actual = (events_in(db), rejections_in(db), self.report(db=db))
                 self.assertEqual(actual, expected)
-                with sqlite3.connect(db) as con:
-                    self.assertEqual(con.execute("PRAGMA integrity_check").fetchone()[0], "ok")
+                with closing(sqlite3.connect(db)) as con:
+                    integrity = con.execute("PRAGMA integrity_check").fetchone()[0]
+                    self.assertEqual(integrity, "ok")
+                    journal = con.execute("PRAGMA journal_mode").fetchone()[0]
+                    synchronous = con.execute("PRAGMA synchronous").fetchone()[0]
+                evidence = {
+                    "phase": phase, "repeat": repeat + 1, "batch_size": 4,
+                    "target_batch": 2, "kill_exit_code": killed_status,
+                    "committed_events_after_kill": expected_events,
+                    "committed_rejections_after_kill": expected_rejections,
+                    "recovered_events": len(actual[0]), "recovered_rejections": len(actual[1]),
+                    "matches_baseline": actual == expected, "integrity_check": integrity,
+                    "journal_mode": journal, "synchronous": synchronous,
+                    "input_sha256": hashlib.sha256((FIXTURES / "golden-12.jsonl").read_bytes()).hexdigest(),
+                }
+                print("CRASH_EVIDENCE " + json.dumps(evidence, sort_keys=True), file=sys.stderr, flush=True)
 
     def test_kill_before_commit_then_replay(self):
         self.verify_recovery("before_commit", 4, 0)

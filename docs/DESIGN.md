@@ -103,6 +103,8 @@ rejections 테이블은 input_sha256, line_no, reason, detail, raw_line을 저�
 
 보고서에 필요한 조회들은 하나의 읽기 트랜잭션 안에서 같은 DB 상태를 기준으로 수행한다. 결과 파일은 임시 파일로 완성한 뒤 교체한다. DB에 저장된 이벤트가 기준이며 보고서는 다시 생성할 수 있다.
 
+보고서와 오류 내보내기의 출력 경로가 DB 경로와 같으면 실패로 종료한다. 이 경로 충돌은 추가 테스트를 먼저 작성해 실패를 재현한 뒤 보호 로직을 구현한다.
+
 ### 실행별 요약과 서비스 지표의 구분
 
 수집 성공 시 input_lines, inserted, duplicates, invalid, conflicts를 출력하고 합계가 input_lines와 일치해야 한다. 완료된 수집에 대해 유효한 새 이벤트는 inserted, 기존 내용과 같은 이벤트는 duplicates, 형식과 값 오류는 invalid, ID 내용 충돌은 conflicts로 센다.

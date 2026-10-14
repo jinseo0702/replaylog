@@ -55,7 +55,15 @@ def atomic_output(path, write_content):
             temporary.unlink()
 
 
+def validate_export_destination(database_path, output_path):
+    database = Path(database_path).resolve()
+    output = Path(output_path).resolve()
+    if database == output or (database.exists() and output.exists() and os.path.samefile(database, output)):
+        raise ValueError("output path must differ from the database path")
+
+
 def export_report(database_path, output_path):
+    validate_export_destination(database_path, output_path)
     result = business_report(database_path)
 
     def write(stream):
@@ -66,6 +74,7 @@ def export_report(database_path, output_path):
 
 
 def export_rejections(database_path, output_path):
+    validate_export_destination(database_path, output_path)
     con = reader(database_path)
     try:
         con.execute("BEGIN")

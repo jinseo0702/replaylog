@@ -2,6 +2,7 @@
 
 import argparse
 import base64
+import hashlib
 import io
 import json
 from pathlib import Path
@@ -25,7 +26,8 @@ with tempfile.TemporaryDirectory(prefix="replaylog-test-") as directory:
         cwd=directory,env=env,capture_output=True,text=True,encoding="utf-8",timeout=120)
     print(json.dumps({"returncode":result.returncode,"stdout":result.stdout,"stderr":result.stderr,
         "environment":{"platform":platform.platform(),"python":platform.python_version(),
-        "sqlite":sqlite3.sqlite_version,"execution":"WSL Ubuntu-22.04 temporary source copy"}}))
+        "sqlite":sqlite3.sqlite_version,"execution":"WSL Ubuntu-22.04 temporary source copy",
+        "source_manifest":payload["source_manifest"],"source_sha256":payload["source_sha256"]}}))
 '''
 
 
@@ -34,12 +36,18 @@ def main():
     parser.add_argument("--stage", choices=["red", "green", "safety-red", "final"], required=True)
     args = parser.parse_args()
     buffer = io.BytesIO()
+    manifest = {}
     with zipfile.ZipFile(buffer, "w", zipfile.ZIP_DEFLATED) as archive:
         for folder in ["tests", "fixtures", "replaylog"]:
             for path in sorted((ROOT / folder).rglob("*")):
                 if path.is_file() and "__pycache__" not in path.parts:
-                    archive.write(path, path.relative_to(ROOT).as_posix())
-    payload = json.dumps({"archive": base64.b64encode(buffer.getvalue()).decode("ascii")})
+                    relative = path.relative_to(ROOT).as_posix()
+                    content = path.read_bytes()
+                    manifest[relative] = hashlib.sha256(content).hexdigest()
+                    archive.writestr(relative, content)
+    source_sha = hashlib.sha256(json.dumps(manifest, sort_keys=True).encode("utf-8")).hexdigest()
+    payload = json.dumps({"archive": base64.b64encode(buffer.getvalue()).decode("ascii"),
+                          "source_manifest": manifest, "source_sha256": source_sha})
     result = subprocess.run(
         ["wsl", "--distribution", "Ubuntu-22.04", "--exec", "python3", "-c", RUNNER],
         input=payload, capture_output=True, text=True, encoding="utf-8", timeout=150,

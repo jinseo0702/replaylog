@@ -1,0 +1,44 @@
+Environment: {"platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.35", "python": "3.10.12", "sqlite": "3.37.2", "execution": "WSL Ubuntu-22.04 temporary source copy", "source_manifest": {"tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "tests/support.py": "e886732201f5d0d9fbf4d5bcbda9ab5b5fee3bea59e0f55f2a7a3ba6973ed683", "tests/test_contract.py": "2cbc3c197b9c77ccbe42913b59f5ffecc776f7e96568ba452eefc6f44c43830f", "tests/test_crash_recovery.py": "e2c6dbf9081e842f30f85c723dee80387526533d7a5a380af4c3be3f9631bada", "fixtures/expected-rejections.json": "fb90056afc3a70ba256af413b9605189fd1f34e9dc24b51cb5e3fb427eb56449", "fixtures/expected-report.json": "f3b395d308d522bc31bc40e3cc30f03156ecea059c8e5cac51251c1bc2d3227c", "fixtures/golden-12.jsonl": "e3492c791345374ae88d20d371bb05443b8a14b538d06d830747a40ae8333ada", "replaylog/__init__.py": "29e9ee18cf02a62f24f83729aff0016fccf57835710c90e9c374e2c3c676b8be", "replaylog/__main__.py": "63115b9dc6590b56af5349e99b54a67b83c7d8b782e4590f25087b725b5b2ec8", "replaylog/pipeline.py": "f85ed9be33e59f7e8d0bbb2e5a28780093ac643f3609ceb4c19bb708d205ced1", "replaylog/reporting.py": "a488d1c2b7f8a7396eede894b73761232c8e660655654dcc4605e3d6dcb44df4", "replaylog/storage.py": "db0f22a05d2fb20bcc59c2b78aeae4c10d4da0f3a5ca672f1c82b9a57cb6615f", "replaylog/validation.py": "b5c64cc00f911054aad4844876d7e9a6e73032629a9c20e5c5b58e2f23a84ebd"}, "source_sha256": "9a68231c6afac52e3b82aa459af00e162e6f4ccc87e4d1a101f6bedf6ceb0f32"}
+test_batch_size_does_not_change_final_result (test_contract.ContractTests) ... ok
+test_blank_line_is_a_rejected_physical_line (test_contract.ContractTests) ... ok
+test_collision_free_order_and_duplicate_multiplicity_do_not_change_metrics (test_contract.ContractTests) ... ok
+test_conflicting_query_is_not_silently_dropped (test_contract.ContractTests) ... ok
+test_conflicting_status_keeps_original (test_contract.ContractTests) ... ok
+test_database_is_structurally_valid_after_replay (test_contract.ContractTests) ... ok
+test_directory_cannot_be_used_as_database (test_contract.ContractTests) ... ok
+test_empty_file_has_zero_rate_and_empty_groups (test_contract.ContractTests) ... ok
+test_error_locations_match_independent_fixture (test_contract.ContractTests) ... ok
+test_first_run_summary_accounts_for_every_line (test_contract.ContractTests) ... ok
+test_first_valid_arrival_wins_a_conflict (test_contract.ContractTests) ... ok
+test_golden_business_report (test_contract.ContractTests) ... ok
+test_invalid_batch_sizes_are_rejected (test_contract.ContractTests) ... ok
+test_invalid_inputs_are_classified_without_blocking_valid_row (test_contract.ContractTests) ... ok
+test_invalid_utf8_fails_but_preserves_previously_committed_batch (test_contract.ContractTests) ... ok
+test_json_order_and_outside_whitespace_do_not_change_identity (test_contract.ContractTests) ... ok
+test_last_line_without_newline_is_processed (test_contract.ContractTests) ... ok
+test_missing_database_is_not_created_by_report (test_contract.ContractTests) ... ok
+test_missing_input_is_failure (test_contract.ContractTests) ... ok
+test_query_is_bound_as_data_not_sql (test_contract.ContractTests) ... ok
+test_rejection_export_cannot_replace_its_database (test_contract.ContractTests) ... ok
+test_rejection_export_contains_original_line_and_reason (test_contract.ContractTests) ... ok
+test_replay_preserves_events_rejections_and_report (test_contract.ContractTests) ... ok
+test_report_cannot_replace_its_database (test_contract.ContractTests) ... ok
+test_same_bytes_under_another_filename_do_not_duplicate_rejections (test_contract.ContractTests) ... ok
+test_same_id_in_two_services_is_not_duplicate (test_contract.ContractTests) ... ok
+test_status_boundaries_and_rate_denominator (test_contract.ContractTests) ... ok
+test_unwritable_output_path_is_reported_as_failure (test_contract.ContractTests) ... ok
+test_kill_after_commit_then_replay (test_crash_recovery.CrashRecoveryTests) ... CRASH_EVIDENCE {"batch_size": 4, "committed_events_after_kill": 5, "committed_rejections_after_kill": 1, "input_sha256": "e3492c791345374ae88d20d371bb05443b8a14b538d06d830747a40ae8333ada", "integrity_check": "ok", "journal_mode": "delete", "kill_exit_code": -9, "matches_baseline": true, "phase": "after_commit", "recovered_events": 5, "recovered_rejections": 5, "repeat": 1, "synchronous": 2, "target_batch": 2}
+CRASH_EVIDENCE {"batch_size": 4, "committed_events_after_kill": 5, "committed_rejections_after_kill": 1, "input_sha256": "e3492c791345374ae88d20d371bb05443b8a14b538d06d830747a40ae8333ada", "integrity_check": "ok", "journal_mode": "delete", "kill_exit_code": -9, "matches_baseline": true, "phase": "after_commit", "recovered_events": 5, "recovered_rejections": 5, "repeat": 2, "synchronous": 2, "target_batch": 2}
+CRASH_EVIDENCE {"batch_size": 4, "committed_events_after_kill": 5, "committed_rejections_after_kill": 1, "input_sha256": "e3492c791345374ae88d20d371bb05443b8a14b538d06d830747a40ae8333ada", "integrity_check": "ok", "journal_mode": "delete", "kill_exit_code": -9, "matches_baseline": true, "phase": "after_commit", "recovered_events": 5, "recovered_rejections": 5, "repeat": 3, "synchronous": 2, "target_batch": 2}
+ok
+test_kill_before_commit_then_replay (test_crash_recovery.CrashRecoveryTests) ... CRASH_EVIDENCE {"batch_size": 4, "committed_events_after_kill": 4, "committed_rejections_after_kill": 0, "input_sha256": "e3492c791345374ae88d20d371bb05443b8a14b538d06d830747a40ae8333ada", "integrity_check": "ok", "journal_mode": "delete", "kill_exit_code": -9, "matches_baseline": true, "phase": "before_commit", "recovered_events": 5, "recovered_rejections": 5, "repeat": 1, "synchronous": 2, "target_batch": 2}
+CRASH_EVIDENCE {"batch_size": 4, "committed_events_after_kill": 4, "committed_rejections_after_kill": 0, "input_sha256": "e3492c791345374ae88d20d371bb05443b8a14b538d06d830747a40ae8333ada", "integrity_check": "ok", "journal_mode": "delete", "kill_exit_code": -9, "matches_baseline": true, "phase": "before_commit", "recovered_events": 5, "recovered_rejections": 5, "repeat": 2, "synchronous": 2, "target_batch": 2}
+CRASH_EVIDENCE {"batch_size": 4, "committed_events_after_kill": 4, "committed_rejections_after_kill": 0, "input_sha256": "e3492c791345374ae88d20d371bb05443b8a14b538d06d830747a40ae8333ada", "integrity_check": "ok", "journal_mode": "delete", "kill_exit_code": -9, "matches_baseline": true, "phase": "before_commit", "recovered_events": 5, "recovered_rejections": 5, "repeat": 3, "synchronous": 2, "target_batch": 2}
+ok
+
+----------------------------------------------------------------------
+Ran 30 tests in 5.035s
+
+OK
+
+Exit code: 0

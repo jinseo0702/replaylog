@@ -1,6 +1,7 @@
 """Acceptance tests written from the design before application code."""
 
 import hashlib
+from contextlib import closing
 import json
 import random
 import sqlite3
@@ -196,7 +197,7 @@ class ContractTests(CliCase):
     def test_database_is_structurally_valid_after_replay(self):
         self.ingest()
         self.ingest()
-        with sqlite3.connect(self.db) as con:
+        with closing(sqlite3.connect(self.db)) as con:
             self.assertEqual(con.execute("PRAGMA integrity_check").fetchone()[0], "ok")
 
     def test_unwritable_output_path_is_reported_as_failure(self):
