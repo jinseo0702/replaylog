@@ -31,7 +31,7 @@ with tempfile.TemporaryDirectory(prefix="replaylog-test-") as directory:
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--stage", choices=["red", "green", "final"], required=True)
+    parser.add_argument("--stage", choices=["red", "green", "safety-red", "final"], required=True)
     args = parser.parse_args()
     buffer = io.BytesIO()
     with zipfile.ZipFile(buffer, "w", zipfile.ZIP_DEFLATED) as archive:
@@ -48,7 +48,8 @@ def main():
         print(result.stderr, file=sys.stderr)
         return result.returncode
     data = json.loads(result.stdout)
-    destination = ROOT / "evidence" / ("01-red-linux.txt" if args.stage == "red" else "02-green-linux.txt" if args.stage == "green" else "03-final-linux.txt")
+    names = {"red": "01-red-linux.txt", "green": "02-green-linux.txt", "safety-red": "03-safety-red-linux.txt", "final": "04-final-linux.txt"}
+    destination = ROOT / "evidence" / names[args.stage]
     log = "Environment: " + json.dumps(data["environment"], ensure_ascii=False) + "\n"
     log += data["stdout"] + data["stderr"]
     log += "\nExit code: " + str(data["returncode"]) + "\n"

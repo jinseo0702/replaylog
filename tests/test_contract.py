@@ -206,3 +206,17 @@ class ContractTests(CliCase):
         result = self.cli("report", "--db", self.db, "--out", parent_file / "report.json", ok=False)
         self.assertNotEqual(result.returncode, 0)
         self.assertEqual(parent_file.read_text(encoding="utf-8"), "keep")
+
+    def test_report_cannot_replace_its_database(self):
+        self.ingest()
+        before = self.db.read_bytes()
+        result = self.cli("report", "--db", self.db, "--out", self.db, ok=False)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertEqual(self.db.read_bytes(), before)
+
+    def test_rejection_export_cannot_replace_its_database(self):
+        self.ingest()
+        before = self.db.read_bytes()
+        result = self.cli("rejects", "--db", self.db, "--out", self.db, ok=False)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertEqual(self.db.read_bytes(), before)
