@@ -1,0 +1,7 @@
+[
+  {"line_no": 8, "reason": "id_conflict"},
+  {"line_no": 9, "reason": "malformed_json"},
+  {"line_no": 10, "reason": "invalid_schema"},
+  {"line_no": 11, "reason": "invalid_value"},
+  {"line_no": 12, "reason": "invalid_value"}
+]

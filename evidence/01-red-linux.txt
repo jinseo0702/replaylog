@@ -1,0 +1,441 @@
+Environment: {"platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.35", "python": "3.10.12", "sqlite": "3.37.2", "execution": "WSL Ubuntu-22.04 temporary source copy"}
+test_batch_size_does_not_change_final_result (test_contract.ContractTests) ... test_blank_line_is_a_rejected_physical_line (test_contract.ContractTests) ... FAIL
+test_collision_free_order_and_duplicate_multiplicity_do_not_change_metrics (test_contract.ContractTests) ... test_conflicting_query_is_not_silently_dropped (test_contract.ContractTests) ... FAIL
+test_conflicting_status_keeps_original (test_contract.ContractTests) ... FAIL
+test_database_is_structurally_valid_after_replay (test_contract.ContractTests) ... FAIL
+test_directory_cannot_be_used_as_database (test_contract.ContractTests) ... FAIL
+test_empty_file_has_zero_rate_and_empty_groups (test_contract.ContractTests) ... FAIL
+test_error_locations_match_independent_fixture (test_contract.ContractTests) ... FAIL
+test_first_run_summary_accounts_for_every_line (test_contract.ContractTests) ... FAIL
+test_first_valid_arrival_wins_a_conflict (test_contract.ContractTests) ... FAIL
+test_golden_business_report (test_contract.ContractTests) ... FAIL
+test_invalid_batch_sizes_are_rejected (test_contract.ContractTests) ... ok
+test_invalid_inputs_are_classified_without_blocking_valid_row (test_contract.ContractTests) ... FAIL
+test_invalid_utf8_fails_but_preserves_previously_committed_batch (test_contract.ContractTests) ... ERROR
+test_json_order_and_outside_whitespace_do_not_change_identity (test_contract.ContractTests) ... FAIL
+test_last_line_without_newline_is_processed (test_contract.ContractTests) ... FAIL
+test_missing_database_is_not_created_by_report (test_contract.ContractTests) ... ok
+test_missing_input_is_failure (test_contract.ContractTests) ... FAIL
+test_query_is_bound_as_data_not_sql (test_contract.ContractTests) ... FAIL
+test_rejection_export_contains_original_line_and_reason (test_contract.ContractTests) ... FAIL
+test_replay_preserves_events_rejections_and_report (test_contract.ContractTests) ... FAIL
+test_same_bytes_under_another_filename_do_not_duplicate_rejections (test_contract.ContractTests) ... FAIL
+test_same_id_in_two_services_is_not_duplicate (test_contract.ContractTests) ... FAIL
+test_status_boundaries_and_rate_denominator (test_contract.ContractTests) ... FAIL
+test_unwritable_output_path_is_reported_as_failure (test_contract.ContractTests) ... FAIL
+test_kill_after_commit_then_replay (test_crash_recovery.CrashRecoveryTests) ... FAIL
+test_kill_before_commit_then_replay (test_crash_recovery.CrashRecoveryTests) ... FAIL
+
+======================================================================
+ERROR: test_invalid_utf8_fails_but_preserves_previously_committed_batch (test_contract.ContractTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/replaylog-test-l_nqorn1/tests/test_contract.py", line 194, in test_invalid_utf8_fails_but_preserves_previously_committed_batch
+    self.assertEqual(len(events_in(self.db)), 1)
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 34, in events_in
+    return con.execute(
+sqlite3.OperationalError: no such table: events
+
+======================================================================
+FAIL: test_batch_size_does_not_change_final_result (test_contract.ContractTests) (batch_size=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/replaylog-test-l_nqorn1/tests/test_contract.py", line 129, in test_batch_size_does_not_change_final_result
+    self.ingest(db=db, batch=size)
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 77, in ingest
+    result = self.cli(
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 62, in cli
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : /usr/bin/python3: No module named replaylog
+
+
+======================================================================
+FAIL: test_batch_size_does_not_change_final_result (test_contract.ContractTests) (batch_size=4)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/replaylog-test-l_nqorn1/tests/test_contract.py", line 129, in test_batch_size_does_not_change_final_result
+    self.ingest(db=db, batch=size)
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 77, in ingest
+    result = self.cli(
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 62, in cli
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : /usr/bin/python3: No module named replaylog
+
+
+======================================================================
+FAIL: test_batch_size_does_not_change_final_result (test_contract.ContractTests) (batch_size=100)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/replaylog-test-l_nqorn1/tests/test_contract.py", line 129, in test_batch_size_does_not_change_final_result
+    self.ingest(db=db, batch=size)
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 77, in ingest
+    result = self.cli(
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 62, in cli
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : /usr/bin/python3: No module named replaylog
+
+
+======================================================================
+FAIL: test_blank_line_is_a_rejected_physical_line (test_contract.ContractTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/replaylog-test-l_nqorn1/tests/test_contract.py", line 102, in test_blank_line_is_a_rejected_physical_line
+    self.ingest(self.raw_input("\n" + json.dumps(event()) + "\n"))
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 77, in ingest
+    result = self.cli(
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 62, in cli
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : /usr/bin/python3: No module named replaylog
+
+
+======================================================================
+FAIL: test_collision_free_order_and_duplicate_multiplicity_do_not_change_metrics (test_contract.ContractTests) (seed=0)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/replaylog-test-l_nqorn1/tests/test_contract.py", line 141, in test_collision_free_order_and_duplicate_multiplicity_do_not_change_metrics
+    self.ingest(self.input(rows, "permutation.jsonl"), db=db, batch=4)
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 77, in ingest
+    result = self.cli(
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 62, in cli
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : /usr/bin/python3: No module named replaylog
+
+
+======================================================================
+FAIL: test_collision_free_order_and_duplicate_multiplicity_do_not_change_metrics (test_contract.ContractTests) (seed=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/replaylog-test-l_nqorn1/tests/test_contract.py", line 141, in test_collision_free_order_and_duplicate_multiplicity_do_not_change_metrics
+    self.ingest(self.input(rows, "permutation.jsonl"), db=db, batch=4)
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 77, in ingest
+    result = self.cli(
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 62, in cli
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : /usr/bin/python3: No module named replaylog
+
+
+======================================================================
+FAIL: test_collision_free_order_and_duplicate_multiplicity_do_not_change_metrics (test_contract.ContractTests) (seed=2)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/replaylog-test-l_nqorn1/tests/test_contract.py", line 141, in test_collision_free_order_and_duplicate_multiplicity_do_not_change_metrics
+    self.ingest(self.input(rows, "permutation.jsonl"), db=db, batch=4)
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 77, in ingest
+    result = self.cli(
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 62, in cli
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : /usr/bin/python3: No module named replaylog
+
+
+======================================================================
+FAIL: test_collision_free_order_and_duplicate_multiplicity_do_not_change_metrics (test_contract.ContractTests) (seed=3)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/replaylog-test-l_nqorn1/tests/test_contract.py", line 141, in test_collision_free_order_and_duplicate_multiplicity_do_not_change_metrics
+    self.ingest(self.input(rows, "permutation.jsonl"), db=db, batch=4)
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 77, in ingest
+    result = self.cli(
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 62, in cli
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : /usr/bin/python3: No module named replaylog
+
+
+======================================================================
+FAIL: test_collision_free_order_and_duplicate_multiplicity_do_not_change_metrics (test_contract.ContractTests) (seed=4)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/replaylog-test-l_nqorn1/tests/test_contract.py", line 141, in test_collision_free_order_and_duplicate_multiplicity_do_not_change_metrics
+    self.ingest(self.input(rows, "permutation.jsonl"), db=db, batch=4)
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 77, in ingest
+    result = self.cli(
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 62, in cli
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : /usr/bin/python3: No module named replaylog
+
+
+======================================================================
+FAIL: test_conflicting_query_is_not_silently_dropped (test_contract.ContractTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/replaylog-test-l_nqorn1/tests/test_contract.py", line 62, in test_conflicting_query_is_not_silently_dropped
+    self.ingest(self.input([event(), event(query="다른 검색어")]))
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 77, in ingest
+    result = self.cli(
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 62, in cli
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : /usr/bin/python3: No module named replaylog
+
+
+======================================================================
+FAIL: test_conflicting_status_keeps_original (test_contract.ContractTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/replaylog-test-l_nqorn1/tests/test_contract.py", line 55, in test_conflicting_status_keeps_original
+    summary = self.ingest(self.input([event(), event(status_code=500)]))
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 77, in ingest
+    result = self.cli(
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 62, in cli
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : /usr/bin/python3: No module named replaylog
+
+
+======================================================================
+FAIL: test_database_is_structurally_valid_after_replay (test_contract.ContractTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/replaylog-test-l_nqorn1/tests/test_contract.py", line 197, in test_database_is_structurally_valid_after_replay
+    self.ingest()
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 77, in ingest
+    result = self.cli(
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 62, in cli
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : /usr/bin/python3: No module named replaylog
+
+
+======================================================================
+FAIL: test_directory_cannot_be_used_as_database (test_contract.ContractTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/replaylog-test-l_nqorn1/tests/test_contract.py", line 181, in test_directory_cannot_be_used_as_database
+    self.assertIn("error", result.stderr.lower())
+AssertionError: 'error' not found in '/usr/bin/python3: no module named replaylog\n'
+
+======================================================================
+FAIL: test_empty_file_has_zero_rate_and_empty_groups (test_contract.ContractTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/replaylog-test-l_nqorn1/tests/test_contract.py", line 107, in test_empty_file_has_zero_rate_and_empty_groups
+    self.assertEqual(self.ingest(self.raw_input(""))["input_lines"], 0)
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 77, in ingest
+    result = self.cli(
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 62, in cli
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : /usr/bin/python3: No module named replaylog
+
+
+======================================================================
+FAIL: test_error_locations_match_independent_fixture (test_contract.ContractTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/replaylog-test-l_nqorn1/tests/test_contract.py", line 34, in test_error_locations_match_independent_fixture
+    self.ingest(source)
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 77, in ingest
+    result = self.cli(
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 62, in cli
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : /usr/bin/python3: No module named replaylog
+
+
+======================================================================
+FAIL: test_first_run_summary_accounts_for_every_line (test_contract.ContractTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/replaylog-test-l_nqorn1/tests/test_contract.py", line 17, in test_first_run_summary_accounts_for_every_line
+    self.assertEqual(self.ingest(), {
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 77, in ingest
+    result = self.cli(
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 62, in cli
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : /usr/bin/python3: No module named replaylog
+
+
+======================================================================
+FAIL: test_first_valid_arrival_wins_a_conflict (test_contract.ContractTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/replaylog-test-l_nqorn1/tests/test_contract.py", line 67, in test_first_valid_arrival_wins_a_conflict
+    self.ingest(self.input([event(status_code=500), event()]))
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 77, in ingest
+    result = self.cli(
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 62, in cli
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : /usr/bin/python3: No module named replaylog
+
+
+======================================================================
+FAIL: test_golden_business_report (test_contract.ContractTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/replaylog-test-l_nqorn1/tests/test_contract.py", line 13, in test_golden_business_report
+    self.ingest()
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 77, in ingest
+    result = self.cli(
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 62, in cli
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : /usr/bin/python3: No module named replaylog
+
+
+======================================================================
+FAIL: test_invalid_inputs_are_classified_without_blocking_valid_row (test_contract.ContractTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/replaylog-test-l_nqorn1/tests/test_contract.py", line 96, in test_invalid_inputs_are_classified_without_blocking_valid_row
+    summary = self.ingest(self.raw_input(text))
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 77, in ingest
+    result = self.cli(
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 62, in cli
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : /usr/bin/python3: No module named replaylog
+
+
+======================================================================
+FAIL: test_json_order_and_outside_whitespace_do_not_change_identity (test_contract.ContractTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/replaylog-test-l_nqorn1/tests/test_contract.py", line 51, in test_json_order_and_outside_whitespace_do_not_change_identity
+    self.assertEqual(self.ingest(self.raw_input(text))["duplicates"], 1)
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 77, in ingest
+    result = self.cli(
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 62, in cli
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : /usr/bin/python3: No module named replaylog
+
+
+======================================================================
+FAIL: test_last_line_without_newline_is_processed (test_contract.ContractTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/replaylog-test-l_nqorn1/tests/test_contract.py", line 114, in test_last_line_without_newline_is_processed
+    self.ingest(self.raw_input(json.dumps(event())))
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 77, in ingest
+    result = self.cli(
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 62, in cli
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : /usr/bin/python3: No module named replaylog
+
+
+======================================================================
+FAIL: test_missing_input_is_failure (test_contract.ContractTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/replaylog-test-l_nqorn1/tests/test_contract.py", line 169, in test_missing_input_is_failure
+    self.assertIn("error", result.stderr.lower())
+AssertionError: 'error' not found in '/usr/bin/python3: no module named replaylog\n'
+
+======================================================================
+FAIL: test_query_is_bound_as_data_not_sql (test_contract.ContractTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/replaylog-test-l_nqorn1/tests/test_contract.py", line 153, in test_query_is_bound_as_data_not_sql
+    self.ingest(self.input([event(query=query)]))
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 77, in ingest
+    result = self.cli(
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 62, in cli
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : /usr/bin/python3: No module named replaylog
+
+
+======================================================================
+FAIL: test_rejection_export_contains_original_line_and_reason (test_contract.ContractTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/replaylog-test-l_nqorn1/tests/test_contract.py", line 157, in test_rejection_export_contains_original_line_and_reason
+    self.ingest()
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 77, in ingest
+    result = self.cli(
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 62, in cli
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : /usr/bin/python3: No module named replaylog
+
+
+======================================================================
+FAIL: test_replay_preserves_events_rejections_and_report (test_contract.ContractTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/replaylog-test-l_nqorn1/tests/test_contract.py", line 23, in test_replay_preserves_events_rejections_and_report
+    self.ingest()
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 77, in ingest
+    result = self.cli(
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 62, in cli
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : /usr/bin/python3: No module named replaylog
+
+
+======================================================================
+FAIL: test_same_bytes_under_another_filename_do_not_duplicate_rejections (test_contract.ContractTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/replaylog-test-l_nqorn1/tests/test_contract.py", line 145, in test_same_bytes_under_another_filename_do_not_duplicate_rejections
+    self.ingest()
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 77, in ingest
+    result = self.cli(
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 62, in cli
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : /usr/bin/python3: No module named replaylog
+
+
+======================================================================
+FAIL: test_same_id_in_two_services_is_not_duplicate (test_contract.ContractTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/replaylog-test-l_nqorn1/tests/test_contract.py", line 45, in test_same_id_in_two_services_is_not_duplicate
+    self.ingest(self.input([event(), event(service="mobile")]))
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 77, in ingest
+    result = self.cli(
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 62, in cli
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : /usr/bin/python3: No module named replaylog
+
+
+======================================================================
+FAIL: test_status_boundaries_and_rate_denominator (test_contract.ContractTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/replaylog-test-l_nqorn1/tests/test_contract.py", line 119, in test_status_boundaries_and_rate_denominator
+    self.ingest(self.input(rows + [rows[0]]))
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 77, in ingest
+    result = self.cli(
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 62, in cli
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : /usr/bin/python3: No module named replaylog
+
+
+======================================================================
+FAIL: test_unwritable_output_path_is_reported_as_failure (test_contract.ContractTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/replaylog-test-l_nqorn1/tests/test_contract.py", line 203, in test_unwritable_output_path_is_reported_as_failure
+    self.ingest()
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 77, in ingest
+    result = self.cli(
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 62, in cli
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : /usr/bin/python3: No module named replaylog
+
+
+======================================================================
+FAIL: test_kill_after_commit_then_replay (test_crash_recovery.CrashRecoveryTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/replaylog-test-l_nqorn1/tests/test_crash_recovery.py", line 64, in test_kill_after_commit_then_replay
+    self.verify_recovery("after_commit", 5, 1)
+  File "/tmp/replaylog-test-l_nqorn1/tests/test_crash_recovery.py", line 45, in verify_recovery
+    self.ingest(db=baseline, batch=4)
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 77, in ingest
+    result = self.cli(
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 62, in cli
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : /usr/bin/python3: No module named replaylog
+
+
+======================================================================
+FAIL: test_kill_before_commit_then_replay (test_crash_recovery.CrashRecoveryTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/replaylog-test-l_nqorn1/tests/test_crash_recovery.py", line 61, in test_kill_before_commit_then_replay
+    self.verify_recovery("before_commit", 4, 0)
+  File "/tmp/replaylog-test-l_nqorn1/tests/test_crash_recovery.py", line 45, in verify_recovery
+    self.ingest(db=baseline, batch=4)
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 77, in ingest
+    result = self.cli(
+  File "/tmp/replaylog-test-l_nqorn1/tests/support.py", line 62, in cli
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : /usr/bin/python3: No module named replaylog
+
+
+----------------------------------------------------------------------
+Ran 28 tests in 0.597s
+
+FAILED (failures=31, errors=1)
+
+Exit code: 1

@@ -1,0 +1,12 @@
+{"service":"web","event_id":"e001","event_time":"2026-10-14T00:00:00Z","query":"날씨","status_code":200}
+{"service":"web","event_id":"e002","event_time":"2026-10-14T00:00:30Z","query":"날씨","status_code":500}
+{"service":"web","event_id":"e003","event_time":"2026-10-14T00:01:00Z","query":"뉴스","status_code":200}
+{"service":"web","event_id":"e004","event_time":"2026-10-14T01:00:00Z","query":"뉴스","status_code":503}
+{"service":"mobile","event_id":"e001","event_time":"2026-10-14T01:00:30Z","query":"날씨","status_code":200}
+{"status_code":500,"query":"날씨","event_time":"2026-10-14T00:00:30Z","event_id":"e002","service":"web"}
+{"service":"web","event_id":"e003","event_time":"2026-10-14T00:01:00Z","query":"뉴스","status_code":200}
+{"service":"web","event_id":"e001","event_time":"2026-10-14T00:00:00Z","query":"날씨","status_code":500}
+{bad json}
+{"service":"web","event_id":"e006","query":"날씨","status_code":200}
+{"service":"web","event_id":"e007","event_time":"2026-10-14T01:02:00Z","query":"날씨","status_code":999}
+{"service":"web","event_id":"e008","event_time":"2026-02-30T01:03:00Z","query":"날씨","status_code":200}
